@@ -93,7 +93,7 @@ function App() {
    <div className="flex flex-wrap justify-center gap-4 p-4">
     {filteredBreeds.slice(0, sizeOfList).map((dogName, id) => (
      <div key={id}>
-      <DogoCard dogoName={dogName} subBreeds={dogos[dogName]} />
+      <DogoCard dogoName={dogName} subBreeds={[...dogos[dogName]]} />
      </div>
     ))}
    </div>

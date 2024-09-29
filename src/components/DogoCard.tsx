@@ -59,7 +59,15 @@ function DogoCard({
      <CardControls>
       <FavoriteIcon className="join-item" onClick={() => {}} />
       <RedoIcon className="join-item" onClick={() => fetchData(true)} />
-      {subBreeds.length > 0 ? <BreedsIcon className="join-item" /> : ""}
+      {subBreeds.length > 0 ? (
+       <BreedsIcon
+        className="join-item"
+        dogoName={dogoName}
+        subBreeds={subBreeds}
+       />
+      ) : (
+       ""
+      )}
      </CardControls>
     </CardBody>
    )}
