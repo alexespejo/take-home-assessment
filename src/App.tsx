@@ -2,24 +2,46 @@ import { useState, useEffect } from "react";
 import DogoCard from "./components/DogoCard";
 import DogoNavbar from "./components/DogoNavbar";
 import { FaHeart, FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
+import { getSecondWord } from "./lib/StringHelper";
 import { readFromLocalStorage } from "./lib/LocalStorage";
 
 function App() {
  const [filter, setFilter] = useState<string>("");
  const [dogos, setDogos] = useState<{ [key: string]: string[] }>({});
  const [lstDogos, setListDogos] = useState<string[]>([]);
+ const [lstFavs, setLstFavs] = useState<string[]>([]);
+
  const [sizeOfList, setSizeOfList] = useState<number>(12);
  const [isAscending, setIsAscending] = useState(true);
+ const [displayFavorites, setDisplayFavorites] = useState<boolean>(false);
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
 
- const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ const filterTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setFilter(e.target.value);
  };
 
- const filteredBreeds = lstDogos
-  .filter((breed) => breed.toLowerCase().includes(filter.toLowerCase()))
+ const isFavorite = (breed: string) => {
+  if (displayFavorites) {
+   return lstFavs.includes(breed.toLowerCase());
+  }
+  return true;
+ };
+ let filteredBreeds = lstDogos
+  .filter(
+   (breed) =>
+    breed.toLowerCase().includes(filter.toLowerCase()) && isFavorite(breed)
+  )
   .sort((a, b) => (isAscending ? a.localeCompare(b) : b.localeCompare(a)));
+
+ const getFavorites = () => {
+  let storage: string[] = readFromLocalStorage("favs")?.split(";") || [];
+  setLstFavs(storage);
+ };
+ const filterFavorites = () => {
+  getFavorites();
+  setDisplayFavorites(!displayFavorites);
+ };
 
  const fetchData = async (mounted: boolean) => {
   try {
@@ -46,7 +68,7 @@ function App() {
 
  useEffect(() => {
   let isMounted = true;
-
+  getFavorites();
   fetchData(isMounted);
   return () => {
    isMounted = false;
@@ -55,10 +77,10 @@ function App() {
 
  return (
   <main className="flex flex-col justify-center">
-   {readFromLocalStorage("favs")}
    {/* <DogoNavbar /> */}
 
-   <DogoNavbar onChange={handleInputChange}>
+   {readFromLocalStorage("favs")?.split(";")}
+   <DogoNavbar onChange={filterTextChange}>
     <div
      className="tooltip tooltip-primary tooltip-bottom"
      data-tip="Sort Alphabetically"
@@ -82,7 +104,11 @@ function App() {
      )}
     </div>
 
-    <button className="btn btn-primary sm:text-lg absolute right-2">
+    <button
+     className="btn btn-primary sm:text-lg absolute right-2"
+     onClick={filterFavorites}
+     disabled={lstFavs.length === 0}
+    >
      <span className="hidden sm:block">Favorites</span> <FaHeart />
     </button>
    </DogoNavbar>
@@ -92,11 +118,14 @@ function App() {
    >
     Add Dogo {sizeOfList}
    </button>
-
    <div className="flex flex-wrap justify-center gap-4 p-4">
     {filteredBreeds.slice(0, sizeOfList).map((dogName, id) => (
      <div key={id}>
-      <DogoCard dogoName={dogName} subBreeds={[...dogos[dogName]]} />
+      <DogoCard
+       dogoName={getSecondWord(dogName)}
+       subBreeds={[...dogos[dogName]]}
+       bFav={displayFavorites}
+      />
      </div>
     ))}
    </div>

@@ -11,9 +11,11 @@ import CardControls from "./util-components/CardControls";
 function DogoCard({
  dogoName,
  subBreeds,
+ bFav,
 }: {
  dogoName: string;
  subBreeds: string[];
+ bFav: boolean;
 }) {
  const [imgDogo, setImgDogo] = useState<string>("");
  const [loading, setLoading] = useState(true);
@@ -58,7 +60,7 @@ function DogoCard({
     <CardBody>
      <CardImg imgDogo={imgDogo} dogoName={dogoName} />
      <CardControls>
-      <FavoriteIcon dogoName={dogoName} className="join-item" />
+      <FavoriteIcon dogoName={dogoName} className="join-item" bFav={bFav} />
       <RedoIcon className="join-item" onClick={() => fetchData(true)} />
       {subBreeds.length > 0 ? (
        <BreedsIcon

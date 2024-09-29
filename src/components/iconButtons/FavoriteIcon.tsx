@@ -10,17 +10,20 @@ import {
 function FavoriteIcon({
  dogoName,
  className = "",
+ bFav,
 }: {
  dogoName: string;
  className: string;
+ bFav: boolean;
 }) {
- const [isFav, setIsFav] = useState<boolean>(false);
+ const [isFav, setIsFav] = useState<boolean>(true);
 
  const isInFav = () => {
   let lstFavs: string | null = readFromLocalStorage("favs");
   setIsFav(lstFavs !== null && lstFavs.split(";").includes(dogoName));
  };
  useEffect(() => {
+  setIsFav(bFav);
   isInFav();
  }, []);
  return (
@@ -28,11 +31,11 @@ function FavoriteIcon({
    <label className="swap btn btn-secondary btn-outline bg-transparent text-3xl rounded-r-none">
     <input
      type="checkbox"
-     onClick={() => {
+     checked={isFav}
+     onChange={() => {
       storageWriteDelete(dogoName);
       isInFav();
      }}
-     checked={isFav}
     />
     <FaHeart className="swap-on" />
     <FaRegHeart className="swap-off" />

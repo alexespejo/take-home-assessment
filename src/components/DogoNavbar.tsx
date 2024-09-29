@@ -9,7 +9,8 @@ function DogoNavbar({
 }) {
  return (
   <div className="navbar bg-base-100 shadow-xl rounded-xl sticky top-0 z-20 space-x-2 sm:space-x-5">
-   <button className="btn btn-outline text-4xl hidden sm:block">
+   <button className="btn btn-outline text-4xl hidden sm:flex items-center justify-center">
+    <span className="sm:block hidden">Filter</span>
     <PiDogFill />
    </button>
    <input
