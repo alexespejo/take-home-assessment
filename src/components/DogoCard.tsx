@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { getSecondWord } from "../lib/StringHelper";
-import { saveToLocalStorage, readFromLocalStorage } from "../lib/LocalStorage";
 import FavoriteIcon from "./iconButtons/FavoriteIcon";
 import RedoIcon from "./iconButtons/RedoIcon";
-import BreedsIcon from "./iconButtons/BreedsIcon";
+// import BreedsIcon from "./iconButtons/BreedsIcon";
 import CardBody from "./util-components/CardBody";
 import CardImg from "./util-components/CardImg";
 import CardControls from "./util-components/CardControls";
@@ -62,7 +61,7 @@ function DogoCard({
      <CardControls>
       <FavoriteIcon dogoName={dogoName} className="join-item" bFav={bFav} />
       <RedoIcon className="join-item" onClick={() => fetchData(true)} />
-      {subBreeds.length > 0 ? (
+      {/* {subBreeds.length > 0 ? (
        <BreedsIcon
         className="join-item"
         dogoName={dogoName}
@@ -70,7 +69,7 @@ function DogoCard({
        />
       ) : (
        ""
-      )}
+      )} */}
      </CardControls>
     </CardBody>
    )}

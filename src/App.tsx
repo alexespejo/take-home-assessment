@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import DogoCard from "./components/DogoCard";
 import DogoNavbar from "./components/DogoNavbar";
-import { FaHeart, FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
-import { getSecondWord } from "./lib/StringHelper";
+import { FaDog, FaHeart, FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
+import { parseObject } from "./lib/ObjectHelper";
 import { readFromLocalStorage } from "./lib/LocalStorage";
 
 function App() {
@@ -53,9 +53,8 @@ function App() {
 
    if (mounted) {
     const result = await response.json();
-    // process keys into an array
     setDogos(result.message);
-    setListDogos(Object.keys(result.message));
+    setListDogos(parseObject(result.message));
     setLoading(false);
    }
   } catch (err: any) {
@@ -79,7 +78,6 @@ function App() {
   <main className="flex flex-col justify-center">
    {/* <DogoNavbar /> */}
 
-   {readFromLocalStorage("favs")?.split(";")}
    <DogoNavbar onChange={filterTextChange}>
     <div
      className="tooltip tooltip-primary tooltip-bottom"
@@ -116,16 +114,12 @@ function App() {
     className="btn fixed bottom-0 right-0"
     onClick={() => setSizeOfList(sizeOfList + 3)}
    >
-    Add Dogo {sizeOfList}
+    Add Dogo <FaDog />
    </button>
    <div className="flex flex-wrap justify-center gap-4 p-4">
     {filteredBreeds.slice(0, sizeOfList).map((dogName, id) => (
      <div key={id}>
-      <DogoCard
-       dogoName={getSecondWord(dogName)}
-       subBreeds={[...dogos[dogName]]}
-       bFav={displayFavorites}
-      />
+      <DogoCard dogoName={dogName} subBreeds={[]} bFav={displayFavorites} />
      </div>
     ))}
    </div>

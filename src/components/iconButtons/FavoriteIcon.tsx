@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import IconButton from "../util-components/IconButton";
 import {
- saveToLocalStorage,
  readFromLocalStorage,
  storageWriteDelete,
 } from "../../lib/LocalStorage";
@@ -31,7 +30,7 @@ function FavoriteIcon({
    <label className="swap btn btn-secondary btn-outline bg-transparent text-3xl rounded-r-none">
     <input
      type="checkbox"
-     checked={isFav}
+     checked={isFav || bFav}
      onChange={() => {
       storageWriteDelete(dogoName);
       isInFav();
