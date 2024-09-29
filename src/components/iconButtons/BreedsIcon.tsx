@@ -51,17 +51,19 @@ function BreedsIcon({
       </button>
      </div>
     </div>
-    <div className="modal-box w-full overflow-hidden h-3/4 relative">
+    <div className="modal-box w-full  h-3/4 relative">
      <h3 className="font-bold text-lg p-1">
       View more{" "}
       <span className="text-secondary">{capitalizeString(dogoName)}</span>{" "}
       breeds!
      </h3>
-     <p className="flex flex-col justify-center items-center h-full overflow-auto">
-      {subBreeds.map((breed: string) => (
-       <DogoCard dogoName={`${breed} ${dogoName}`} subBreeds={[]} />
+     <div className="flex flex-col justify-center items-center space-y-2">
+      {subBreeds.map((breed: string, id: number) => (
+       <div key={id}>
+        <DogoCard dogoName={`${breed} ${dogoName}`} subBreeds={[]} />
+       </div>
       ))}
-     </p>
+     </div>
      <form method="dialog">
       {/* if there is a button in form, it will close the modal */}
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

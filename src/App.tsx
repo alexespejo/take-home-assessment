@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import DogoCard from "./components/DogoCard";
 import DogoNavbar from "./components/DogoNavbar";
 import { FaHeart, FaSortAlphaUp, FaSortAlphaDown } from "react-icons/fa";
+import { readFromLocalStorage } from "./lib/LocalStorage";
 
 function App() {
  const [filter, setFilter] = useState<string>("");
@@ -45,6 +46,7 @@ function App() {
 
  useEffect(() => {
   let isMounted = true;
+
   fetchData(isMounted);
   return () => {
    isMounted = false;
@@ -53,6 +55,7 @@ function App() {
 
  return (
   <main className="flex flex-col justify-center">
+   {readFromLocalStorage("favs")}
    {/* <DogoNavbar /> */}
 
    <DogoNavbar onChange={handleInputChange}>

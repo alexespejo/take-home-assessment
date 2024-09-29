@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getSecondWord } from "../lib/StringHelper";
+import { saveToLocalStorage, readFromLocalStorage } from "../lib/LocalStorage";
 import FavoriteIcon from "./iconButtons/FavoriteIcon";
 import RedoIcon from "./iconButtons/RedoIcon";
 import BreedsIcon from "./iconButtons/BreedsIcon";
@@ -57,7 +58,7 @@ function DogoCard({
     <CardBody>
      <CardImg imgDogo={imgDogo} dogoName={dogoName} />
      <CardControls>
-      <FavoriteIcon className="join-item" onClick={() => {}} />
+      <FavoriteIcon dogoName={dogoName} className="join-item" />
       <RedoIcon className="join-item" onClick={() => fetchData(true)} />
       {subBreeds.length > 0 ? (
        <BreedsIcon
