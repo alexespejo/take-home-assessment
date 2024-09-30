@@ -6,6 +6,7 @@ import { parseObject } from "./lib/ObjectHelper";
 import { readFromLocalStorage } from "./lib/LocalStorage";
 import { capitalizeString } from "./lib/StringHelper";
 import GalleryModal from "./components/GalleryModal";
+import WelcomeModal from "./components/WelcomeModal";
 
 function App() {
  const [filter, setFilter] = useState<string>("");
@@ -109,6 +110,7 @@ function App() {
     </button>
    </DogoNavbar>
 
+   <WelcomeModal />
    {loading ? (
     <span className="loading loading-spinner loading-lg"></span>
    ) : (
