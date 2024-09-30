@@ -9,3 +9,7 @@ export const getSecondWord = (str: string): string => {
  const words = str.split(" ");
  return words.length >= 2 ? words[1] : str;
 };
+
+export const getFirstWord = (sentence: string): string => {
+ return sentence.split(" ")[0].toLowerCase();
+};

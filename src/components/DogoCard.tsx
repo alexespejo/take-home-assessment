@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { getSecondWord } from "../lib/StringHelper";
+import { getFirstWord, getSecondWord } from "../lib/StringHelper";
+import { filterImagesByBreed, getRandomValue } from "../lib/ObjectHelper";
 import FavoriteIcon from "./iconButtons/FavoriteIcon";
 import RedoIcon from "./iconButtons/RedoIcon";
-// import BreedsIcon from "./iconButtons/BreedsIcon";
+import GallaryIcon from "./iconButtons/GallaryIcon";
 import CardBody from "./util-components/CardBody";
 import CardImg from "./util-components/CardImg";
 import CardControls from "./util-components/CardControls";
@@ -17,22 +18,25 @@ function DogoCard({
  bFav: boolean;
 }) {
  const [imgDogo, setImgDogo] = useState<string>("");
- const [loading, setLoading] = useState(true);
-
- const fetchData = async (mounted: boolean) => {
+ const [loading, setLoading] = useState<boolean>(true);
+ const [lstDogoImgs, setLstDogoImgs] = useState<string[]>([]);
+ const fetchImages = async (mounted: boolean) => {
   try {
    const response = await fetch(
-    `https://dog.ceo/api/breed/${await getSecondWord(dogoName)}/images/random`
+    `https://dog.ceo/api/breed/${getSecondWord(dogoName)}/images`
    );
-
    if (!response.ok) {
     throw new Error("Network response was not ok");
    }
-
    const result = await response.json();
-
    if (mounted) {
-    setImgDogo(result.message);
+    let filteredImgs: string[] = filterImagesByBreed(
+     result.message,
+     getFirstWord(dogoName)
+    );
+
+    setLstDogoImgs(filteredImgs);
+    setImgDogo(getRandomValue(filteredImgs));
     setLoading(false);
    }
   } catch (err: any) {
@@ -45,7 +49,7 @@ function DogoCard({
  useEffect(() => {
   let isMounted = true; // Flag to track if the component is mounted
 
-  fetchData(isMounted);
+  fetchImages(isMounted);
   return () => {
    isMounted = false;
   };
@@ -60,16 +64,18 @@ function DogoCard({
      <CardImg imgDogo={imgDogo} dogoName={dogoName} />
      <CardControls>
       <FavoriteIcon dogoName={dogoName} className="join-item" bFav={bFav} />
-      <RedoIcon className="join-item" onClick={() => fetchData(true)} />
-      {/* {subBreeds.length > 0 ? (
-       <BreedsIcon
-        className="join-item"
-        dogoName={dogoName}
-        subBreeds={subBreeds}
-       />
-      ) : (
-       ""
-      )} */}
+      <RedoIcon
+       className="join-item"
+       imgExist={imgDogo !== undefined}
+       onClick={() => setImgDogo(getRandomValue(lstDogoImgs))}
+      />
+      <GallaryIcon
+       className="join-item"
+       dogoName={dogoName}
+       imgExist={imgDogo !== undefined}
+      >
+       test
+      </GallaryIcon>
      </CardControls>
     </CardBody>
    )}

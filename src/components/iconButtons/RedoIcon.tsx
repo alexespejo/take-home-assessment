@@ -3,9 +3,11 @@ import IconButton from "../util-components/IconButton";
 
 function RedoIcon({
  className = "",
+ imgExist,
  onClick = () => {},
 }: {
  className: string;
+ imgExist: boolean;
  onClick: () => void;
 }) {
  return (
@@ -13,6 +15,7 @@ function RedoIcon({
    <button
     className={`text-3xl btn btn-secondary btn-outline bg-white border-secondary text-secondary ${className}`}
     onClick={onClick}
+    disabled={!imgExist}
    >
     <FaDice />
    </button>

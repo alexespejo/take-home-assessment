@@ -112,7 +112,7 @@ function App() {
    </DogoNavbar>
    <button
     className="btn fixed bottom-0 right-0"
-    onClick={() => setSizeOfList(sizeOfList + 3)}
+    onClick={() => setSizeOfList(sizeOfList + 6)}
    >
     Add Dogo <FaDog />
    </button>

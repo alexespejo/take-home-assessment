@@ -11,3 +11,19 @@ export const parseObject = (data: { [key: string]: string[] }) => {
 
  return result;
 };
+
+export const filterImagesByBreed = (
+ images: string[],
+ breed: string
+): string[] => {
+ const lowerCaseBreed = breed.toLowerCase();
+ return images.filter((image) => image.toLowerCase().includes(lowerCaseBreed));
+};
+
+export const getRandomIndex = (arr: any[]): number => {
+ return Math.floor(Math.random() * arr.length);
+};
+
+export const getRandomValue = <T>(arr: T[]): T => {
+ return arr[getRandomIndex(arr)];
+};
