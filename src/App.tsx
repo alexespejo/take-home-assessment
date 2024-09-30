@@ -27,6 +27,7 @@ function App() {
   }
   return true;
  };
+
  let filteredBreeds = lstDogos
   .filter(
    (breed) =>
@@ -67,10 +68,21 @@ function App() {
 
  useEffect(() => {
   let isMounted = true;
+
   getFavorites();
   fetchData(isMounted);
+
+  const handleScroll = () => {
+   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    setSizeOfList((prevSize) => prevSize + 6);
+   }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+
   return () => {
    isMounted = false;
+   window.removeEventListener("scroll", handleScroll);
   };
  }, []);
 
@@ -89,6 +101,8 @@ function App() {
        onClick={() => setIsAscending(true)}
       >
        <span className="hidden sm:block">Ascending</span>
+       <span className="sm:hidden block">Asc</span>
+
        <FaSortAlphaUp />
       </button>
      ) : (
@@ -97,6 +111,7 @@ function App() {
        onClick={() => setIsAscending(false)}
       >
        <span className="hidden sm:block">Descending</span>
+       <span className="sm:hidden block">Desc</span>
        <FaSortAlphaDown />
       </button>
      )}
@@ -119,7 +134,12 @@ function App() {
    <div className="flex flex-wrap justify-center gap-4 p-4">
     {filteredBreeds.slice(0, sizeOfList).map((dogName, id) => (
      <div key={id}>
-      <DogoCard dogoName={dogName} subBreeds={[]} bFav={displayFavorites} />
+      <DogoCard
+       dogoName={dogName}
+       subBreeds={[]}
+       bFav={displayFavorites}
+       func={getFavorites}
+      />
      </div>
     ))}
    </div>

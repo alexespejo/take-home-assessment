@@ -10,10 +10,12 @@ function FavoriteIcon({
  dogoName,
  className = "",
  bFav,
+ func,
 }: {
  dogoName: string;
  className: string;
  bFav: boolean;
+ func: () => void;
 }) {
  const [isFav, setIsFav] = useState<boolean>(true);
 
@@ -33,6 +35,7 @@ function FavoriteIcon({
      checked={isFav || bFav}
      onChange={() => {
       storageWriteDelete(dogoName);
+      func();
       isInFav();
      }}
     />

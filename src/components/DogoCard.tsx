@@ -12,14 +12,17 @@ function DogoCard({
  dogoName,
  subBreeds,
  bFav,
+ func,
 }: {
  dogoName: string;
  subBreeds: string[];
  bFav: boolean;
+ func: () => void;
 }) {
  const [imgDogo, setImgDogo] = useState<string>("");
  const [loading, setLoading] = useState<boolean>(true);
  const [lstDogoImgs, setLstDogoImgs] = useState<string[]>([]);
+
  const fetchImages = async (mounted: boolean) => {
   try {
    const response = await fetch(
@@ -63,7 +66,12 @@ function DogoCard({
     <CardBody>
      <CardImg imgDogo={imgDogo} dogoName={dogoName} />
      <CardControls>
-      <FavoriteIcon dogoName={dogoName} className="join-item" bFav={bFav} />
+      <FavoriteIcon
+       dogoName={dogoName}
+       className="join-item"
+       bFav={bFav}
+       func={func}
+      />
       <RedoIcon
        className="join-item"
        imgExist={imgDogo !== undefined}

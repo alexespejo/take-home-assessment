@@ -60,11 +60,11 @@ function BreedsIcon({
      <div className="flex flex-col justify-center items-center space-y-2">
       {subBreeds.map((breed: string, id: number) => (
        <div key={id}>
-        <DogoCard
+        {/* <DogoCard
          dogoName={`${breed} ${dogoName}`}
          subBreeds={[]}
          bFav={false}
-        />
+        /> */}
        </div>
       ))}
      </div>

@@ -11,7 +11,10 @@ function CardImg({ imgDogo, dogoName }: { imgDogo: string; dogoName: string }) {
     />
    ) : (
     <div className="skeleton h-52 w-full relative flex items-center justify-center px-5">
-     unfortunately no image of a the {dogoName} has been uploaded :{"("}
+     <p className="text-left">
+      unfortunately no image of a the{" "}
+      <span className="font-bold">{dogoName}</span> has been uploaded :{"("}
+     </p>
     </div>
    )}
    <h2 className="text-xl absolute bottom-1 left-0 hover:scale-105 hover:left-1">
