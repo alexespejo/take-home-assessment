@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
 import DogoCard from "./components/DogoCard";
 import DogoNavbar from "./components/DogoNavbar";
-import {
- FaArrowUp,
- FaHeart,
- FaSortAlphaUp,
- FaSortAlphaDown,
-} from "react-icons/fa";
+import { FaArrowUp, FaHeart } from "react-icons/fa";
 import { parseObject } from "./lib/ObjectHelper";
 import { readFromLocalStorage } from "./lib/LocalStorage";
 import { capitalizeString } from "./lib/StringHelper";
+import GalleryModal from "./components/GalleryModal";
 
 function App() {
  const [filter, setFilter] = useState<string>("");
@@ -72,7 +68,6 @@ function App() {
 
    if (mounted) {
     const result = await response.json();
-    // setDogos(result.message);
     setListDogos(parseObject(result.message));
     setLoading(false);
    }
@@ -118,7 +113,7 @@ function App() {
  }, []);
 
  return (
-  <main className="flex flex-col justify-center">
+  <main className="flex flex-col justify-center overlof-x">
    <DogoNavbar onChange={filterTextChange} onClear={clearFilter}>
     <button
      className="btn btn-primary sm:text-lg absolute right-2 lg:hidden"
@@ -138,27 +133,32 @@ function App() {
 
      <tbody>
       <tr role="button" tabIndex={0} onClick={() => filterFavorites(true)}>
-       <td>All Photos</td>
+       <td>All Dogs</td>
       </tr>
       {lstFavs.map((dogoName) => (
-       <tr
-        onClick={() => {
-         filterFavorites(true);
-         setFilter(dogoName);
-        }}
-        role="button"
-        tabIndex={0}
-       >
-        <td>{capitalizeString(dogoName)}</td>
-       </tr>
+       <GalleryModal dogoName={dogoName}>
+        <tr
+         onClick={async () => {
+          // filterFavorites(true);
+          // setFilter(dogoName);
+          (
+           document.getElementById(`my_modal_${dogoName}`) as HTMLDialogElement
+          )?.showModal();
+         }}
+         role="button"
+         tabIndex={0}
+        >
+         <td>{capitalizeString(dogoName)}</td>
+        </tr>
+       </GalleryModal>
       ))}
      </tbody>
     </table>
    </div>
    <button
-    className={`btn btn-primary fixed bottom-3 right-3 btn-circle text-3xl border-2 border-black ${
+    className={`btn btn-primary fixed bottom-3 left-3 btn-circle text-3xl border-2 border-black ${
      isArrowVisible ? "" : "hidden"
-    }`}
+    } `}
     onClick={scrollToTop}
    >
     <FaArrowUp />
