@@ -2,17 +2,14 @@ import { useState } from "react";
 import { FaDog } from "react-icons/fa";
 import IconButton from "../util-components/IconButton";
 import { FaInfoCircle } from "react-icons/fa";
-import DogoCard from "../DogoCard";
 import { capitalizeString } from "../../lib/StringHelper";
 
 function BreedsIcon({
  className = "",
  dogoName,
- subBreeds,
 }: {
  className: string;
  dogoName: string;
- subBreeds: string[];
 }) {
  const [displayAlert, setDisplayAlert] = useState<boolean>(true);
  return (
@@ -58,15 +55,15 @@ function BreedsIcon({
       breeds!
      </h3>
      <div className="flex flex-col justify-center items-center space-y-2">
-      {subBreeds.map((breed: string, id: number) => (
+      {/* {subBreeds.map((breed: string, id: number) => (
        <div key={id}>
-        {/* <DogoCard
+        <DogoCard
          dogoName={`${breed} ${dogoName}`}
          subBreeds={[]}
          bFav={false}
-        /> */}
+        />
        </div>
-      ))}
+      ))} */}
      </div>
      <form method="dialog">
       {/* if there is a button in form, it will close the modal */}

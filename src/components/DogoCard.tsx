@@ -96,9 +96,7 @@ function DogoCard({
        className="join-item"
        dogoName={dogoName}
        imgExist={imgDogo !== undefined}
-      >
-       test
-      </GallaryIcon>
+      />
      </CardControls>
     </CardBody>
    )}
