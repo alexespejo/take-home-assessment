@@ -29,17 +29,17 @@ function FavoriteIcon({
  }, []);
  return (
   <IconButton className={className} toolTip="Favorite">
-   <label className="swap btn btn-secondary btn-outline bg-transparent text-3xl rounded-r-none">
-    <input
-     type="checkbox"
-     onClick={() => {
-      storageWriteDelete(dogoName);
-      func();
-      isInFav();
-     }}
-    />
+   {/* weird conditional bug */}
+   <button
+    className="swap btn btn-secondary btn-outline bg-transparent text-3xl rounded-r-none"
+    onClick={() => {
+     storageWriteDelete(dogoName);
+     func();
+     isInFav();
+    }}
+   >
     {isFav || bFav ? <FaHeart className="" /> : <FaRegHeart className="" />}
-   </label>
+   </button>
   </IconButton>
  );
 }

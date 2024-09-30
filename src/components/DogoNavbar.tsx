@@ -23,9 +23,11 @@ function DogoNavbar({
      className="input input-bordered join-item sm:text-lg md:w-96 "
      onChange={onChange}
     />
-    <button className="btn btn-primary join-item text-lg" onClick={onClear}>
-     Clear <GrPowerReset />
-    </button>
+    <div className="tooltip tooltip-right" data-tip="Reset Filters">
+     <button className="btn btn-primary join-item text-lg" onClick={onClear}>
+      Reset <GrPowerReset />
+     </button>
+    </div>
    </div>
    {children}
   </div>

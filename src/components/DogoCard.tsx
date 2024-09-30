@@ -12,12 +12,10 @@ import CardControls from "./util-components/CardControls";
 
 function DogoCard({
  dogoName,
- subBreeds,
  bFav,
  func,
 }: {
  dogoName: string;
- subBreeds: string[];
  bFav: boolean;
  func: () => void;
 }) {
