@@ -1,11 +1,14 @@
 import { PiDogFill } from "react-icons/pi";
+import { GrPowerReset } from "react-icons/gr";
 
 function DogoNavbar({
  children,
  onChange,
+ onClear,
 }: {
  children: React.ReactNode;
  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+ onClear: () => void;
 }) {
  return (
   <div className="navbar bg-base-100 shadow-xl rounded-xl sticky top-0 z-20 space-x-2 sm:space-x-5">
@@ -13,13 +16,17 @@ function DogoNavbar({
     <span className="sm:block hidden">Filter</span>
     <PiDogFill />
    </button>
-   <input
-    type="text"
-    placeholder="Search by dog breed"
-    className="input input-bordered sm:text-lg md:w-96 "
-    onChange={onChange}
-   />
-
+   <div className="join">
+    <input
+     type="text"
+     placeholder="Search by dog breed"
+     className="input input-bordered join-item sm:text-lg md:w-96 "
+     onChange={onChange}
+    />
+    <button className="btn btn-primary join-item text-lg" onClick={onClear}>
+     Clear <GrPowerReset />
+    </button>
+   </div>
    {children}
   </div>
  );

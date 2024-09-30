@@ -32,15 +32,13 @@ function FavoriteIcon({
    <label className="swap btn btn-secondary btn-outline bg-transparent text-3xl rounded-r-none">
     <input
      type="checkbox"
-     checked={isFav || bFav}
-     onChange={() => {
+     onClick={() => {
       storageWriteDelete(dogoName);
       func();
       isInFav();
      }}
     />
-    <FaHeart className="swap-on" />
-    <FaRegHeart className="swap-off" />
+    {isFav || bFav ? <FaHeart className="" /> : <FaRegHeart className="" />}
    </label>
   </IconButton>
  );

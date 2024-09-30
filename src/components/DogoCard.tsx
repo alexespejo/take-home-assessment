@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getFirstWord, getSecondWord } from "../lib/StringHelper";
 import { filterImagesByBreed, getRandomValue } from "../lib/ObjectHelper";
+import { FaDice, FaHeart } from "react-icons/fa";
+import { GrGallery } from "react-icons/gr";
 import FavoriteIcon from "./iconButtons/FavoriteIcon";
 import RedoIcon from "./iconButtons/RedoIcon";
 import GallaryIcon from "./iconButtons/GallaryIcon";
@@ -61,7 +63,22 @@ function DogoCard({
  return (
   <>
    {loading ? (
-    <p>Loading...</p>
+    <CardBody>
+     <CardImg imgDogo={""} dogoName={"n#n"} />
+     <CardControls>
+      <div className="join">
+       <button className="btn join-item skeleton text-3xl">
+        <FaHeart />
+       </button>
+       <button className="btn join-item skeleton text-3xl">
+        <FaDice />
+       </button>
+       <button className="btn join-item skeleton text-3xl">
+        <GrGallery />
+       </button>
+      </div>
+     </CardControls>
+    </CardBody>
    ) : (
     <CardBody>
      <CardImg imgDogo={imgDogo} dogoName={dogoName} />
