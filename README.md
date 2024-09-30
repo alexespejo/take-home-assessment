@@ -1,5 +1,6 @@
 # Dogo Gallery
 
+[Live Demo](https://take-home-assessment-sable.vercel.app/)
 ## Installation and Run Locally
 
 ### Prerequisites
