@@ -116,7 +116,7 @@ function App() {
    ) : (
     <>
      {" "}
-     <div className="h-96 min-w-48 overflow-x-auto fixed right-0 top-1/2 transform -translate-y-1/2 hidden lg:block ">
+     <div className="h-96 min-w-48 overflow-x-auto fixed right-0 top-1/2 transform -translate-y-1/2 hidden lg:block z-50 ">
       {displayFavorites ? (
        <button className="btn btn-primary" onClick={filterFavorites}>
         <FaArrowLeft />
@@ -175,7 +175,7 @@ function App() {
      >
       <FaArrowUp />
      </button>
-     <div className="flex flex-wrap justify-center lg:justify-start lg:items-start gap-4 p-4">
+     <div className="flex flex-wrap justify-center lg:justify-start lg:items-start gap-4 p-4 w-5/6">
       {filteredBreeds.slice(0, sizeOfList).map((dogName, id) => (
        <div key={id}>
         <DogoCard
