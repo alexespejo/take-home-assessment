@@ -168,7 +168,7 @@ function App() {
       </table>
      </div>
      <button
-      className={`btn btn-primary fixed bottom-3 left-3 btn-circle text-3xl border-2 border-black ${
+      className={`btn btn-primary fixed bottom-3 right-3 btn-circle text-3xl border-2 border-black ${
        isArrowVisible ? "" : "hidden"
       } `}
       onClick={scrollToTop}
